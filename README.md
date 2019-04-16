@@ -25,18 +25,17 @@ pip3 install git+https://github.com/Koziev/rulemma
 ```
 import rutokenizer
 import rupostagger
-import rulemmatizer
+import rulemma
 
 
-lemmatizer = rulemmatizer.Word2Lemmas()
-lemmatizer.load('../tmp/rulemma.dat')
+lemmatizer = rulemma.Lemmatizer()
+lemmatizer.load()
 
 tokenizer = rutokenizer.Tokenizer()
 tokenizer.load()
 
 tagger = rupostagger.RuPosTagger()
 tagger.load()
-print('Loading finished')
 
 sent = u'Мяукая, голодные кошки ловят жирненьких мышек'
 tokens = tokenizer.tokenize(sent)
