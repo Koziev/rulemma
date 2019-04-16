@@ -2,11 +2,11 @@ import operator
 import rutokenizer
 import rupostagger
 
-import rulemmatizer
+import rulemma
 
 if __name__ == '__main__':
     print('Loading dictionaries and models...')
-    lemmatizer = rulemmatizer.Word2Lemmas()
+    lemmatizer = rulemma.Lemmatizer()
     lemmatizer.load('../tmp/rulemma.dat')
 
     tokenizer = rutokenizer.Tokenizer()

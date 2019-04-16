@@ -19,17 +19,18 @@ def decode_pos(pos):
         return pos
 
 
-class Word2Lemmas(object):
+class Lemmatizer(object):
     def __init__(self):
         pass
 
     def load(self, dict_path=None):
         """ Загружаем модель лемматизации, созданную отдельным скриптом builder.py """
+        dict_filename = 'rulemma.dat'
         if dict_path is None:
             module_folder = str(pathlib.Path(__file__).resolve().parent)
-            p = os.path.join(module_folder, '../tmp', self.dict_filename)
+            p = os.path.join(module_folder, '../tmp', dict_filename)
             if not os.path.exists(p):
-                p = os.path.join(module_folder, self.dict_filename)
+                p = os.path.join(module_folder, dict_filename)
         else:
             p = dict_path
 
