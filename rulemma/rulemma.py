@@ -35,7 +35,7 @@ class Lemmatizer(object):
             p = dict_path
 
         with gzip.open(p, 'r') as f:
-            self.forms, self.forms2, self.special_lemmas = pickle.load(f)
+            self.forms, self.forms2, self.special_lemmas, self.key2transducer = pickle.load(f)
 
     def get_lemma(self, word):
         if word in self.forms:
@@ -182,7 +182,16 @@ class Lemmatizer(object):
             for lemma, lemma_part_of_speech in self.forms2[nword]:
                 if lemma_part_of_speech == part_of_speech:
                     return lemma, part_of_speech, decoded_tags
+        elif len(word) > 4:
+            # используем модель лемматизации для OV-слов
+            ending = word[-4:]
+            key = ending + u'|' + part_of_speech
+            if key in self.key2transducer:
+                transducer = self.key2transducer[key]
+                lemma = word[:-transducer[0]] + transducer[1]
+                return lemma, part_of_speech, decoded_tags
 
+        # fallback-вариант - возвращаем исходное слово в качестве леммы
         return word, part_of_speech, decoded_tags
 
     def lemmatize(self, tagged_words):

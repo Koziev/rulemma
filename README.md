@@ -37,7 +37,7 @@ tokenizer.load()
 tagger = rupostagger.RuPosTagger()
 tagger.load()
 
-sent = u'Мяукая, голодные кошки ловят жирненьких мышек'
+sent = u'Мяукая, голодные кошки ловят жирненьких хрюнделей'
 tokens = tokenizer.tokenize(sent)
 tags = tagger.tag(tokens)
 lemmas = lemmatizer.lemmatize(tags)
@@ -54,10 +54,8 @@ for word, tags, lemma, *_ in lemmas:
 кошки          	кошка          	NOUN|Case=Nom|Number=Plur
 ловят          	ловить         	VERB|Mood=Ind|Number=Plur|Person=3|Tense=Notpast|VerbForm=Fin
 жирненьких     	жирненький     	ADJ|Case=Acc|Degree=Pos|Number=Plur
-мышек          	мышка          	NOUN|Case=Acc|Number=Plur
+хрюнделей      	хрюндель       	NOUN|Case=Acc|Number=Plur
 ```
 
-## Ограничения текущей версии
-
-В текущей версии не выполняется обработка несловарных токенов,
-отсутствующих в [грамматическом словаре](https://github.com/Koziev/GrammarEngine).
+Обратите внимание на последний токен 'хрюнделей'. Лемматизатор содержит модель для обработки out-of-vocabulary слов,
+и во многих случаях она нормально приводит слово к лемме, учитывая результаты частеречной разметки.
