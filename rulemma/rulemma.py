@@ -148,6 +148,8 @@ class Lemmatizer(object):
                         stags1.append((u'ВРЕМЯ', u'ПРОШЕДШЕЕ'))
                     elif tag == u'Tense=Notpast':
                         stags1.append((u'ВРЕМЯ', u'НАСТОЯЩЕЕ'))
+                    elif tag == u'Tense=Pres':
+                        stags1.append((u'ВРЕМЯ', u'НАСТОЯЩЕЕ'))
                     elif tag == u'Person=1':
                         stags1.append((u'ЛИЦО', u'1'))
                     elif tag == u'Person=2':
@@ -161,8 +163,8 @@ class Lemmatizer(object):
                     elif tag == u'VerbForm=Conv':
                         pass
                     else:
-                        print(u'неизвестный тэг "{}"'.format(tag))
-                        raise NotImplementedError()
+                        msg = u'неизвестный тэг "{}"'.format(tag)
+                        raise RuntimeError(msg)
                 elif part_of_speech == u'НАРЕЧИЕ':
                     raise NotImplementedError()
                 else:
