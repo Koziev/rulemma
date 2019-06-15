@@ -82,6 +82,8 @@ class Lemmatizer(object):
                         stags1.append((u'ПАДЕЖ', u'МЕСТ'))
                     elif tag == u'Case=Gen':
                         stags1.append((u'ПАДЕЖ', u'РОД'))
+                    elif tag == u'Case=Voc':
+                        stags1.append((u'ПАДЕЖ', u'ЗВАТ'))
                     elif tag == u'Number=Sing':
                         stags1.append((u'ЧИСЛО', u'ЕД'))
                     elif tag == u'Number=Plur':
