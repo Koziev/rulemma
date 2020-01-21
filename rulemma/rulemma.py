@@ -195,9 +195,9 @@ class Lemmatizer(object):
                 lemma = word[:-transducer[0]] + transducer[1]
                 return lemma, part_of_speech, decoded_tags
 
-        # fallback-вариант - возвращаем исходное слово в качестве леммы
-        return word, part_of_speech, decoded_tags
+        # fallback-вариант - возвращаем исходное слово в нижнем регистре в качестве леммы
+        return nword, part_of_speech, decoded_tags
 
     def lemmatize(self, tagged_words):
-        """Для результата работы rupostagger'а добавляем часть лемму и извлеченный код части речи"""
+        """Для результата работы rupostagger'а добавляем лемму и извлеченный код части речи"""
         return [(word, tags,)+tuple(self.get_lemma2(word, tags)) for (word, tags) in tagged_words]
