@@ -126,7 +126,7 @@ class Lemmatizer(object):
                         stags1.append((u'СТЕПЕНЬ', u'СРАВН'))
                     elif tag == u'Degree=Pos':
                         stags1.append((u'СТЕПЕНЬ', u'АТРИБ'))
-                    elif tag == u'Variant=Short':
+                    elif tag in (u'Variant=Short', u'Variant=Brev'):
                         stags1[short_tag_index] = (u'КРАТКИЙ', u'1')
                     else:
                         print(u'неизвестный тэг "{}"'.format(tag))
