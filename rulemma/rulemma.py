@@ -192,8 +192,12 @@ class Lemmatizer(object):
             key = ending + u'|' + part_of_speech
             if key in self.key2transducer:
                 transducer = self.key2transducer[key]
-                lemma = word[:-transducer[0]] + transducer[1]
-                return lemma, part_of_speech, decoded_tags
+                if transducer[0] > 0:
+                    lemma = word[:-transducer[0]] + transducer[1]
+                else:
+                    lemma = word + transducer[1]
+
+                return lemma.lower(), part_of_speech, decoded_tags
 
         # fallback-вариант - возвращаем исходное слово в нижнем регистре в качестве леммы
         return nword, part_of_speech, decoded_tags
