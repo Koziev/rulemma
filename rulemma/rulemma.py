@@ -176,19 +176,34 @@ class Lemmatizer(object):
 
     def get_lemma2(self, word, pos_tags):
         part_of_speech, decoded_tags = self.decode_pos_tags(pos_tags)
+
         nword = word.lower()
+
         if nword in self.special_lemmas:
             return self.special_lemmas[nword], part_of_speech, decoded_tags
-        elif nword in self.forms:
+
+        if nword in self.forms:
             lemma = self.forms[nword]
             return lemma, part_of_speech, decoded_tags
         elif nword in self.forms2:
-            for lemma, lemma_part_of_speech in self.forms2[nword]:
-                if lemma_part_of_speech == part_of_speech:
-                    return lemma, part_of_speech, decoded_tags
+            if part_of_speech == 'СУЩЕСТВИТЕЛЬНОЕ':
+                # Для существительных учитываем падеж.
+                required_case = None
+                for tag in decoded_tags:
+                    if tag[0] == 'ПАДЕЖ':
+                        required_case = tag[1]
+                        break
+
+                for lemma, lemma_part_of_speech, tag in self.forms2[nword]:
+                    if lemma_part_of_speech == part_of_speech and tag == required_case:
+                        return lemma, part_of_speech, decoded_tags
+            else:
+                for lemma, lemma_part_of_speech, tags in self.forms2[nword]:
+                    if lemma_part_of_speech == part_of_speech:
+                        return lemma, part_of_speech, decoded_tags
         elif len(word) > 4:
             # используем модель лемматизации для OV-слов
-            ending = word[-4:]
+            ending = nword[-4:]
             key = ending + u'|' + part_of_speech
             if key in self.key2transducer:
                 transducer = self.key2transducer[key]
