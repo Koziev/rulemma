@@ -79,7 +79,7 @@ class Lemmatizer(object):
                     elif tag == u'Case=Prep':
                         stags1.append((u'ПАДЕЖ', u'ПРЕДЛ'))
                     elif tag == u'Case=Loc':
-                        stags1.append((u'ПАДЕЖ', u'МЕСТ'))
+                        stags1.append((u'ПАДЕЖ', u'ПРЕДЛ'))  # 03-02-2020 u'МЕСТ'
                     elif tag == u'Case=Gen':
                         stags1.append((u'ПАДЕЖ', u'РОД'))
                     elif tag == u'Case=Voc':
@@ -109,7 +109,7 @@ class Lemmatizer(object):
                     elif tag == u'Case=Prep':
                         stags1.append((u'ПАДЕЖ', u'ПРЕДЛ'))
                     elif tag == u'Case=Loc':
-                        stags1.append((u'ПАДЕЖ', u'МЕСТ'))
+                        stags1.append((u'ПАДЕЖ', u'ПРЕДЛ')) # 03-02-2020 u'МЕСТ'
                     elif tag == u'Case=Gen':
                         stags1.append((u'ПАДЕЖ', u'РОД'))
                     elif tag == u'Number=Sing':
@@ -148,6 +148,8 @@ class Lemmatizer(object):
                         stags1.append((u'НАКЛОНЕНИЕ', u'ПОБУД'))
                     elif tag == u'Tense=Past':
                         stags1.append((u'ВРЕМЯ', u'ПРОШЕДШЕЕ'))
+                    elif tag == u'Tense=Fut':
+                        stags1.append((u'ВРЕМЯ', u'БУДУЩЕЕ'))
                     elif tag == u'Tense=Notpast':
                         stags1.append((u'ВРЕМЯ', u'НАСТОЯЩЕЕ'))
                     elif tag == u'Tense=Pres':
@@ -168,7 +170,12 @@ class Lemmatizer(object):
                         msg = u'неизвестный тэг "{}"'.format(tag)
                         raise RuntimeError(msg)
                 elif part_of_speech == u'НАРЕЧИЕ':
-                    raise NotImplementedError()
+                    if tag == u'Degree=Pos':
+                        stags1.append((u'СТЕПЕНЬ', u'АТРИБ'))
+                    elif tag == u'Degree=Cmp':
+                        stags1.append((u'СТЕПЕНЬ', u'СРАВН'))
+                    else:
+                        raise NotImplementedError()
                 else:
                     pass
 
