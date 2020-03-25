@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Лемматизатор для R&D прототипирования NLP задач в Питоне
+25.03.2020 добавлена ефикация в get_lemma2
 """
 
 from __future__ import division
@@ -184,7 +185,7 @@ class Lemmatizer(object):
     def get_lemma2(self, word, pos_tags):
         part_of_speech, decoded_tags = self.decode_pos_tags(pos_tags)
 
-        nword = word.lower()
+        nword = word.lower().replace('ё', 'е')
 
         if nword in self.special_lemmas:
             return self.special_lemmas[nword], part_of_speech, decoded_tags

@@ -6,7 +6,7 @@ with io.open("README.md", mode="r", encoding='utf-8') as fh:
 
 setuptools.setup(
     name="rulemma",
-    version="0.0.41",
+    version="0.0.42",
     author="Ilya Koziev",
     author_email="inkoziev@gmail.com",
     description="Lemmatization library for Russian language",
