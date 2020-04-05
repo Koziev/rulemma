@@ -2,6 +2,7 @@
 """
 Лемматизатор для R&D прототипирования NLP задач в Питоне
 25.03.2020 добавлена ефикация в get_lemma2
+05.04.2020 добавлено декодирование для частей речи CONJ, PART и PUNCT
 """
 
 from __future__ import division
@@ -67,6 +68,12 @@ class Lemmatizer(object):
                 part_of_speech = u'МЕСТОИМЕНИЕ'
             elif tag == 'ADP':
                 part_of_speech = u'ПРЕДЛОГ'
+            elif tag == 'CONJ':
+                part_of_speech = u'СОЮЗ'
+            elif tag == 'PART':
+                part_of_speech = u'ЧАСТИЦА'
+            elif tag == 'PUNCT':
+                part_of_speech = u'ПУНКТУАТОР'
             elif '=' in tag:
                 if part_of_speech == u'СУЩЕСТВИТЕЛЬНОЕ':
                     if tag == u'Case=Nom':
